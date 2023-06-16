@@ -3,7 +3,7 @@ package com.cgzy.utils;
 import java.util.Random;
 
 /**
- *
+ *       Test
  * 用于生成注册用户的时候生成的salt盐随机数
  */
 public class SaltUtils {
