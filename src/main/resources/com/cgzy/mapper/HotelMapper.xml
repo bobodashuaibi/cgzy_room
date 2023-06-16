@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cgzy.mapper.Hotel">
+
+<!--    录入宿舍信息-->
+    <insert id="insertHotel" parameterType="com.cgzy.entity.t_Hotel">
+        insert  into t_hotel values (#{hotel_number},#{room_number},#{bed_number},"0")
+    </insert>
+
+<!--    宿舍管理信息,通过宿舍num-->
+    <select id="selectHotelInfoByHotel" parameterType="com.cgzy.entity.t_Hotel" resultType="com.cgzy.entity.t_Hotel">
+        select * from t_hotel where hotel_number=#{hotel_number}
+    </select>
+
+<!--    宿舍管理信息,通过宿舍hotel_num和room_num-->
+    <select id="selectHotelInfo" parameterType="com.cgzy.entity.t_Hotel" resultType="com.cgzy.entity.t_Hotel">
+        select * from t_hotel where hotel_number = #{hotel_number}
+                                and room_number = #{room_number}
+    </select>
+
+    <!--    更新宿舍管理信息中的人数信息-->
+    <update id="updateRoomPeople" parameterType="com.cgzy.entity.t_Hotel">
+        update t_hotel set people_num = #{people_num} where hotel_number=#{hotel_number} and room_number = #{room_number}
+    </update>
+
+    <!--    宿舍管理所有信息-->
+    <select id="hotelAllInfo" resultType="com.cgzy.entity.t_Hotel">
+        select * from t_hotel
+    </select>
+
+    <!--    管理员删除指定寝室信息-->
+    <delete id="delhotelInfo" parameterType="com.cgzy.entity.t_Hotel">
+        delete from t_hotel where hotel_number = #{hotel_number} and room_number = #{room_number}
+    </delete>
+
+</mapper>

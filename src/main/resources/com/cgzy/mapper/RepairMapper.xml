@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cgzy.mapper.Repair">
+
+<!--    根据寝室号查询报修情况-->
+    <select id="getRepairInfo" resultType="com.cgzy.entity.t_Repair" parameterType="com.cgzy.entity.t_Repair">
+        select * from t_repair where hotel_number=#{hotel_number} and room_number=#{room_number}
+    </select>
+
+    <!--    查询所有的报修，就是表上全部数据-->
+    <select id="getRepairAllInfo" resultType="com.cgzy.entity.t_Repair">
+        select * from t_repair
+    </select>
+
+    <!--   查询未解决的报修信息-->
+    <select id="getNoRepairInfo" resultType="com.cgzy.entity.t_Repair">
+        select * from t_repair where statu="维修中"
+    </select>
+
+<!--    管理员完成寝室维修      1是完成维修，0是未完成维修     -->
+    <update id="succRepairInfo" parameterType="com.cgzy.entity.t_Repair">
+        update t_repair set statu="完成" where hotel_number = #{hotel_number} and room_number = #{room_number}
+    </update>
+
+    <!--    学生插入报修信息    -->
+    <update id="insertRepairInfo" parameterType="com.cgzy.entity.t_Repair">
+        insert into t_repair values (#{hotel_number},#{room_number},#{repair},#{statu})
+    </update>
+
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgzy.mapper.ActivitiDao">
+
+    <select id="getLeaveInfo" resultType="com.cgzy.entity.LeaveProcess" parameterType="String">
+        SELECT * FROM LeaveProcess WHERE process_instance_id = #{process_instance_id}
+    </select>
+
+
+
+    <select id="insertLeaveInfo"  parameterType="com.cgzy.entity.LeaveProcess">
+        insert into LeaveProcess values (#{process_instance_id},#{business_key},#{user_id},#{user_name},#{start_time},#{end_time},#{leave_type},#{reason},#{apply_time},#{state})
+    </select>
+
+    <select id="getTaskIdByProcess" resultType="com.cgzy.entity.t_Task" parameterType="String" >
+        SELECT * FROM act_ru_task WHERE PROC_INST_ID_ = #{PROC_INST_ID_}
+    </select>
+
+    <select id="getHistoryInfoByUserName" resultType="com.cgzy.entity.t_History" parameterType="String" >
+        SELECT * FROM act_hi_taskinst WHERE ASSIGNEE_ = #{ASSIGNEE_}
+    </select>
+
+    <select id="getLeaveInfoByProcessId" resultType="com.cgzy.entity.LeaveProcess" parameterType="String" >
+        SELECT * FROM LeaveProcess WHERE process_instance_id = #{process_instance_id}
+    </select>
+
+    <select id="uptStatePass"  parameterType="String">
+        update LeaveProcess set state = "同意" where process_instance_id = #{process_instance_id}
+    </select>
+
+    <select id="uptStateNoPass"  parameterType="String">
+        update LeaveProcess set state = "不同意" where process_instance_id = #{process_instance_id}
+    </select>
+
+</mapper>

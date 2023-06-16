@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cgzy.mapper.Admin">
+
+<!--    根据管理员账号查询用户对象-->
+    <select id="getAdminInfoById" resultType="com.cgzy.entity.t_Admin" parameterType="String">
+        select * from t_admin where admin_num=#{admin_num}
+    </select>
+
+    <!--    根据管理员账号查询用户对象-->
+    <select id="getAdminById" resultType="com.cgzy.entity.t_Admin" parameterType="String">
+        select * from t_admin where admin_num=#{admin_num}
+    </select>
+
+    <!--    超级管理员账号查询管理员-->
+    <select id="getAdminInfo" resultType="com.cgzy.entity.t_Admin">
+        select * from t_admin where admin_room="1A" or admin_room="1B" or admin_room="2A"
+                                 or admin_room="2B" or admin_room="3A" or admin_room="3B"
+    </select>
+
+
+<!--    超级管理员管理管理员-->
+    <insert id="insertAdmin"  parameterType="com.cgzy.entity.t_Admin">
+        insert  into t_admin values (#{admin_num},#{admin_name},#{admin_pw},#{admin_room})
+    </insert>
+
+    <update id="uptAdmin"  parameterType="com.cgzy.entity.t_Admin">
+        update t_admin set  admin_name = #{admin_name},admin_pw = #{admin_pw},admin_room = #{admin_room} where admin_num = #{admin_num}
+    </update>
+
+    <delete id="delAdmin" parameterType="com.cgzy.entity.t_Admin">
+        delete from t_admin where admin_num = #{admin_num}
+    </delete>
+</mapper>
